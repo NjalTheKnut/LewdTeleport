@@ -52,6 +52,16 @@ namespace LewdTeleport.Gui {
                 AetheryteManager.Load();
             if (ImGui.IsItemHovered())
                 ImGui.SetTooltip("This does not apply to Estate Names (Appartment, Shared Estate etc.)");
+            if (ImGui.Checkbox("Enable NSFW", ref LewdTeleportMain.Config.EnableNSFW))
+                LewdTeleportMain.Config.Save();
+            if (ImGui.IsItemHovered())
+                ImGui.SetTooltip("Allows teleports you make to randomly strip your Warrior of Light to their smallclothes." +
+                    "Note: Requires Penumbra/Glamourer to be installed");
+            if (ImGui.Checkbox("Force NSFW", ref LewdTeleportMain.Config.ForceNSFW))
+                LewdTeleportMain.Config.Save();
+            if (ImGui.IsItemHovered())
+                ImGui.SetTooltip("Forces EVERY teleport you make to strip your Warrior of Light to their smallclothes." +
+                    "Note: Requires Penumbra/Glamourer to be installed");
 
             ImGui.AlignTextToFramePadding();
             ImGui.TextUnformatted("Allow Partial Match:");
