@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using ImGuiNET;
-using TeleporterPlugin.Managers;
-using TeleporterPlugin.Plugin;
+using LewdTeleport.Managers;
+using LewdTeleport.Plugin;
 
-namespace TeleporterPlugin.Gui {
+namespace LewdTeleport.Gui {
     public static class ConfigWindow {
         private static bool m_Visible;
         public static bool Enabled {
@@ -22,7 +22,7 @@ namespace TeleporterPlugin.Gui {
         public static void Draw() {
             if(!m_Visible) return;
             try {
-                if (!ImGui.Begin("Teleporter Config", ref m_Visible)) return;
+                if (!ImGui.Begin("Lewd Teleport Config", ref m_Visible)) return;
 
                 if(ImGui.BeginTabBar("##tpConfigTabs")) {
                     if (ImGui.BeginTabItem("General")) {
@@ -43,12 +43,12 @@ namespace TeleporterPlugin.Gui {
         }
 
         private static void DrawGeneralTab() {
-            if (ImGui.Checkbox("Show Chat Messages", ref TeleporterPluginMain.Config.ChatMessage))
-                TeleporterPluginMain.Config.Save();
+            if (ImGui.Checkbox("Show Chat Messages", ref LewdTeleportMain.Config.ChatMessage))
+                LewdTeleportMain.Config.Save();
             ImGui.SameLine();
-            if (ImGui.Checkbox("Show Error Messages", ref TeleporterPluginMain.Config.ChatError)) 
-                TeleporterPluginMain.Config.Save();
-            if (ImGui.Checkbox("Use English Aetheryte Names", ref TeleporterPluginMain.Config.UseEnglish))
+            if (ImGui.Checkbox("Show Error Messages", ref LewdTeleportMain.Config.ChatError)) 
+                LewdTeleportMain.Config.Save();
+            if (ImGui.Checkbox("Use English Aetheryte Names", ref LewdTeleportMain.Config.UseEnglish))
                 AetheryteManager.Load();
             if (ImGui.IsItemHovered())
                 ImGui.SetTooltip("This does not apply to Estate Names (Appartment, Shared Estate etc.)");
@@ -56,31 +56,31 @@ namespace TeleporterPlugin.Gui {
             ImGui.AlignTextToFramePadding();
             ImGui.TextUnformatted("Allow Partial Match:");
             ImGui.SameLine();
-            if (ImGui.Checkbox("Aetheryte", ref TeleporterPluginMain.Config.AllowPartialName))
-                TeleporterPluginMain.Config.Save();
+            if (ImGui.Checkbox("Aetheryte", ref LewdTeleportMain.Config.AllowPartialName))
+                LewdTeleportMain.Config.Save();
             ImGui.SameLine();
-            if (ImGui.Checkbox("Alias", ref TeleporterPluginMain.Config.AllowPartialAlias))
-                TeleporterPluginMain.Config.Save();
+            if (ImGui.Checkbox("Alias", ref LewdTeleportMain.Config.AllowPartialAlias))
+                LewdTeleportMain.Config.Save();
 
             ImGui.Separator();
-            if(ImGui.Checkbox("Grand Company Ticket Teleport", ref TeleporterPluginMain.Config.EnableGrandCompany))
-                TeleporterPluginMain.Config.Save();
-            if (TeleporterPluginMain.Config.EnableGrandCompany) {
+            if(ImGui.Checkbox("Grand Company Ticket Teleport", ref LewdTeleportMain.Config.EnableGrandCompany))
+                LewdTeleportMain.Config.Save();
+            if (LewdTeleportMain.Config.EnableGrandCompany) {
                 ImGui.SameLine();
-                ImGui.TextUnformatted(" /tp");
+                ImGui.TextUnformatted(" /ltp");
                 ImGui.SetNextItemWidth(80);
                 ImGui.SameLine();
-                ImGui.InputText("##GcAlias", ref TeleporterPluginMain.Config.GrandCompanyAlias, 512);
+                ImGui.InputText("##GcAlias", ref LewdTeleportMain.Config.GrandCompanyAlias, 512);
             }
 
-            if (ImGui.Checkbox("Eternity Ring Teleport", ref TeleporterPluginMain.Config.EnableEternityRing))
-                TeleporterPluginMain.Config.Save();
-            if (TeleporterPluginMain.Config.EnableEternityRing) {
+            if (ImGui.Checkbox("Eternity Ring Teleport", ref LewdTeleportMain.Config.EnableEternityRing))
+                LewdTeleportMain.Config.Save();
+            if (LewdTeleportMain.Config.EnableEternityRing) {
                 ImGui.SameLine();
-                ImGui.TextUnformatted(" /tp");
+                ImGui.TextUnformatted(" /ltp");
                 ImGui.SetNextItemWidth(80);
                 ImGui.SameLine();
-                ImGui.InputText("##RingAlias", ref TeleporterPluginMain.Config.EternityRingAlias, 512);
+                ImGui.InputText("##RingAlias", ref LewdTeleportMain.Config.EternityRingAlias, 512);
             }
         }
         
@@ -92,7 +92,7 @@ namespace TeleporterPlugin.Gui {
             ImGui.TableSetupColumn("##aliasBtns", ImGuiTableColumnFlags.WidthFixed);
             ImGui.TableHeadersRow();
 
-            var list = TeleporterPluginMain.Config.AliasList.ToList();
+            var list = LewdTeleportMain.Config.AliasList.ToList();
             for (var i = -1; i < list.Count; i++) {
                 var alias = i < 0 ? m_DummyAlias : list[i];
                 ImGui.TableNextColumn();
@@ -100,10 +100,10 @@ namespace TeleporterPlugin.Gui {
                 ImGui.SetCursorPosX(0);
                 if (ImGui.InputText($"##alias{i}Input", ref alias.Alias, 512, ImGuiInputTextFlags.EnterReturnsTrue)) {
                     if (i == -1) {
-                        TeleporterPluginMain.Config.AliasList.Insert(0, alias);
+                        LewdTeleportMain.Config.AliasList.Insert(0, alias);
                         m_DummyAlias = new TeleportAlias();
                     }
-                    TeleporterPluginMain.Config.Save();
+                    LewdTeleportMain.Config.Save();
                 }
                 ImGui.TableNextColumn();
                 ImGui.TextUnformatted(alias.Aetheryte);
@@ -124,11 +124,11 @@ namespace TeleporterPlugin.Gui {
                             if (ImGui.Selectable(name, selected)) {
                                 alias.Update(info);
                                 if (i == -1) {
-                                    TeleporterPluginMain.Config.AliasList.Insert(0, alias);
+                                    LewdTeleportMain.Config.AliasList.Insert(0, alias);
                                     m_DummyAlias = new TeleportAlias();
                                 }
 
-                                TeleporterPluginMain.Config.Save();
+                                LewdTeleportMain.Config.Save();
                             }
 
                             if (selected) ImGui.SetItemDefaultFocus();
@@ -140,8 +140,8 @@ namespace TeleporterPlugin.Gui {
 
                 ImGui.SameLine();
                 if (i != -1 && ImGui.Button($" X ##alias{i}delete")) {
-                    TeleporterPluginMain.Config.AliasList.Remove(alias);
-                    TeleporterPluginMain.Config.Save();
+                    LewdTeleportMain.Config.AliasList.Remove(alias);
+                    LewdTeleportMain.Config.Save();
                 }
             }
             ImGui.EndTable();

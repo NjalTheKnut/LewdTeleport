@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using Dalamud.Configuration;
-using TeleporterPlugin.Managers;
-using TeleporterPlugin.Plugin;
+using LewdTeleport.Managers;
+using LewdTeleport.Plugin;
 
-namespace TeleporterPlugin {
+namespace LewdTeleport {
     public class Configuration : IPluginConfiguration {
         public int Version { get; set; } = 2;
 
         public bool UseEnglish = false;
+
+        public bool EnableNSFW = false;
+        public bool ForceNSFW = false;
 
         public bool AllowPartialName = true;
         public bool AllowPartialAlias = false;
@@ -26,11 +29,11 @@ namespace TeleporterPlugin {
         #region Helper
 
         public void Save() {
-            TeleporterPluginMain.PluginInterface.SavePluginConfig(this);
+            LewdTeleportMain.PluginInterface.SavePluginConfig(this);
         }
 
         public static Configuration Load() {
-            var config = TeleporterPluginMain.PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
+            var config = LewdTeleportMain.PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
             foreach (var alias in config.AliasList)
                 alias.Aetheryte = AetheryteManager.GetAetheryteName(alias);
             return config;

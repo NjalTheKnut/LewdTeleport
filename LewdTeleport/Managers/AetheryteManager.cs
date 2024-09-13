@@ -7,9 +7,9 @@ using Dalamud.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using Lumina.Excel.GeneratedSheets;
-using TeleporterPlugin.Plugin;
+using LewdTeleport.Plugin;
 
-namespace TeleporterPlugin.Managers {
+namespace LewdTeleport.Managers {
     public static class AetheryteManager {
         public static readonly Dictionary<uint, string> AetheryteNames = new(150);
         public static readonly Dictionary<uint, string> TerritoryNames = new(80);
@@ -21,7 +21,7 @@ namespace TeleporterPlugin.Managers {
         private static uint[] m_EstateIds = { 0 };
 
         public static void Load() {
-            var lang = TeleporterPluginMain.Config.UseEnglish ? ClientLanguage.English : TeleporterPluginMain.ClientState.ClientLanguage;
+            var lang = LewdTeleportMain.Config.UseEnglish ? ClientLanguage.English : LewdTeleportMain.ClientState.ClientLanguage;
             SetupAetherytes(AetheryteNames, lang);
             SetupMaps(TerritoryNames, lang);
             SetupEstateIds(out m_EstateIds);
@@ -75,7 +75,7 @@ namespace TeleporterPlugin.Managers {
         }
 
         public static unsafe bool UpdateAvailableAetherytes() {
-            if (TeleporterPluginMain.ClientState.LocalPlayer == null)
+            if (LewdTeleportMain.ClientState.LocalPlayer == null)
                 return false;
             try {
                 var tp = Telepo.Instance();
@@ -87,7 +87,7 @@ namespace TeleporterPlugin.Managers {
                 return true;
             } catch(Exception ex) {
                 AvailableAetherytes.Clear();
-                TeleporterPluginMain.PluginLog.Error(ex, "Error while Updating the Aetheryte List");
+                LewdTeleportMain.PluginLog.Error(ex, "Error while Updating the Aetheryte List");
             }
             return false;
         }
@@ -110,7 +110,7 @@ namespace TeleporterPlugin.Managers {
             var tm = Framework.Instance()->GetUIModule()->GetRaptureTextModule();
             var sp = tm->GetAddonText(8518);
             var name = Marshal.PtrToStringUTF8(new IntPtr(sp)) ?? string.Empty;
-            return TeleporterPluginMain.PluginInterface.Sanitizer.Sanitize(name);
+            return LewdTeleportMain.PluginInterface.Sanitizer.Sanitize(name);
         }
 
         private static unsafe string GetSharedHouseName(int ward, int plot) {
@@ -122,7 +122,7 @@ namespace TeleporterPlugin.Managers {
 
         private static void SetupEstateIds(out uint[] array) {
             var list = new List<uint>(10);
-            var sheet = TeleporterPluginMain.Data.GetExcelSheet<Aetheryte>(ClientLanguage.English)!;
+            var sheet = LewdTeleportMain.Data.GetExcelSheet<Aetheryte>(ClientLanguage.English)!;
             foreach (var aetheryte in sheet) {
                 if (aetheryte.PlaceName.Row is 1145 or 1160)
                     list.Add(aetheryte.RowId);
@@ -131,26 +131,26 @@ namespace TeleporterPlugin.Managers {
         }
 
         private static void SetupAetherytes(IDictionary<uint, string> dict, ClientLanguage language) {
-            var sheet = TeleporterPluginMain.Data.GetExcelSheet<Aetheryte>(language)!;
+            var sheet = LewdTeleportMain.Data.GetExcelSheet<Aetheryte>(language)!;
             dict.Clear();
             foreach (var row in sheet) {
                 var name = row.PlaceName.Value?.Name?.ToString();
                 if (string.IsNullOrEmpty(name))
                     continue;
-                name = TeleporterPluginMain.PluginInterface.Sanitizer.Sanitize(name);
+                name = LewdTeleportMain.PluginInterface.Sanitizer.Sanitize(name);
                 dict[row.RowId] = name;
             }
         }
 
         private static void SetupMaps(IDictionary<uint, string> dict, ClientLanguage language) {
-            var sheet = TeleporterPluginMain.Data.GetExcelSheet<Aetheryte>(language)!;
+            var sheet = LewdTeleportMain.Data.GetExcelSheet<Aetheryte>(language)!;
             dict.Clear();
             foreach (var row in sheet) {
                 var name = row.Territory.Value?.PlaceName.Value?.Name?.ToString();
                 if (string.IsNullOrEmpty(name))
                     continue;
                 if (row is not { IsAetheryte: true }) continue;
-                name = TeleporterPluginMain.PluginInterface.Sanitizer.Sanitize(name);
+                name = LewdTeleportMain.PluginInterface.Sanitizer.Sanitize(name);
                 dict[row.RowId] = name;
             }
         }

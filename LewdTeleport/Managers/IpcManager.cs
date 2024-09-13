@@ -3,9 +3,9 @@ using Dalamud.Plugin;
 using Dalamud.Plugin.Ipc;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
-using TeleporterPlugin.Plugin;
+using LewdTeleport.Plugin;
 
-namespace TeleporterPlugin.Managers {
+namespace LewdTeleport.Managers {
     public static unsafe class IpcManager {
         private static ICallGateProvider<uint, byte, bool>? m_CallGateTp;
         private static ICallGateProvider<bool>? m_CallGateTpMessage;
@@ -21,7 +21,7 @@ namespace TeleporterPlugin.Managers {
         }
 
         private static bool IpcChatMessageSetting() {
-            return TeleporterPluginMain.Config.ChatMessage;
+            return LewdTeleportMain.Config.ChatMessage;
         }
 
         private static bool IpcTeleport(uint aetheryteId, byte subIndex) {

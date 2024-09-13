@@ -19,7 +19,7 @@
   <PackageReference Include="DalamudPackager" Version="2.1.13" />
 
   <Content Include="images\icon.png" CopyToOutputDirectory="Always" />
-  <Content Include="TeleporterPlugin.json" CopyToOutputDirectory="Always" />
+  <Content Include="LewdTeleport.json" CopyToOutputDirectory="Always" />
 
   <Reference Include="Dalamud" HintPath="$(DalamudLibPath)Dalamud.dll" Private="False" />
   <Reference Include="ImGui.NET" HintPath="$(DalamudLibPath)ImGui.NET.dll" Private="False" />
@@ -27,4 +27,6 @@
   <Reference Include="Lumina.Excel" HintPath="$(DalamudLibPath)Lumina.Excel.dll" Private="False" />
   <Reference Include="FFXIVClientStructs" HintPath="$(DalamudLibPath)FFXIVClientStructs.dll" Private="False" />
  </ItemGroup>
+
+ <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

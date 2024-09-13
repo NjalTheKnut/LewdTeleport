@@ -1,11 +1,11 @@
 ﻿using Dalamud.IoC;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
-using TeleporterPlugin.Gui;
-using TeleporterPlugin.Managers;
+using LewdTeleport.Gui;
+using LewdTeleport.Managers;
 
-namespace TeleporterPlugin.Plugin {
-    public sealed class TeleporterPluginMain : IDalamudPlugin {
+namespace LewdTeleport.Plugin {
+    public sealed class LewdTeleportMain : IDalamudPlugin {
         [PluginService] public static IDalamudPluginInterface PluginInterface { get; set; } = null!;
         [PluginService] public static IDataManager Data { get; set; } = null!;
         [PluginService] public static IClientState ClientState { get; set; } = null!;
@@ -14,7 +14,7 @@ namespace TeleporterPlugin.Plugin {
         [PluginService] public static IPluginLog PluginLog { get; set; } = null!;
         public static Configuration Config { get; set; } = new();
 
-        public TeleporterPluginMain() {
+        public LewdTeleportMain() {
             AetheryteManager.Load();
             CommandManager.Load();
             
