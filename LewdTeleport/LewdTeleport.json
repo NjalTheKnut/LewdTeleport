@@ -6,8 +6,8 @@
   "Punchline": "Chat Commands for Teleporting, now with a dash of spicy flavoring!",
   "Description": "Adds Chat Commands to Teleport to Aetherytes or Areas by Name, and adds some optional ENF theatrics upon arrival.\ne.g. /ltp Quarrymill or /ltpm South Shroud\nSupports setting up an Alias for Aetherytes to be used with Teleporter Commands\ne.g. /ltp home instead of /ltp Estate Hall (Free Company)",
   "RepoUrl": "https://github.com/NjalTheKnut/LewdTeleport",
-  "Tags": {
+  "Tags": [
     "QoL",
     "Utility"
-  }
+  ]
  }
