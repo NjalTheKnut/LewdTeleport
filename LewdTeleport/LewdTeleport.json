@@ -2,21 +2,12 @@
   "Author": "Pohky, NjalTheKnut",
   "Name": "Lewder Teleporter",
   "InternalName": "LewdTeleport",
-  "AssemblyVersion": "0.0.0.1",
+  "AssemblyVersion": "2.0.2.3",
   "Punchline": "Chat Commands for Teleporting, now with a dash of spicy flavoring!",
-  "Description": "Adds Chat Commands to Teleport to Aetherytes or Areas by Name, and adds random or forced ENF theatrics upon arrival.\ne.g.,
-  "Quarrymill" "or",
-  "/ltpm" "South",
-  "Shroud\\nSupports" "setting",
-  "up" "an",
-  "Alias" "for",
-  "Aetherytes" "to",
-  "be" "used",
-  "with" "Teleporter",
-  "Commands\\ne.g." "/ltp",
-  "home" "instead",
-  "of" "/ltp",
-  "Estate" "Hall",
-  "(Free" "Company)\",",
-  "RepoUrl": "https://github.com/NjalTheKnut/LewdTeleport"
-}
+  "Description": "Adds Chat Commands to Teleport to Aetherytes or Areas by Name, and adds some optional ENF theatrics upon arrival.\ne.g. /ltp Quarrymill or /ltpm South Shroud\nSupports setting up an Alias for Aetherytes to be used with Teleporter Commands\ne.g. /ltp home instead of /ltp Estate Hall (Free Company)",
+  "RepoUrl": "https://github.com/NjalTheKnut/LewdTeleport",
+  "Tags": {
+    "QoL",
+    "Utility"
+  }
+ }
